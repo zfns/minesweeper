@@ -1,0 +1,31 @@
+{
+  "name": "minesweeper",
+  "version": "0.0.1",
+  "private": true,
+  "config": {
+    "name": "minesweeper",
+    "version": "0.0.1"
+  },
+  "scripts": {
+    "postinstall": "cd frontend && npm i",
+    "clean": "rm -fr dist/",
+    "mkdir": "mkdir dist && mkdir dist/$npm_package_config_name",
+    "precopy": "npm run mkdir",
+    "copy": "cp -r app.js package.json frontend dist/$npm_package_config_name && rm -fr dist/$npm_package_config_name/frontend/scripts/*.js && cp -r .tmp/scripts/bundle.js dist/$npm_package_config_name/frontend/scripts",
+    "postcopy": "npm run install_dep",
+    "install_dep": "cd dist/$npm_package_config_name && npm i --production",
+    "dev": "nodemon --watch app.js app.js & webpack --watch --config build/webpack.dev.config.js",
+    "zip": "cd dist && zip -r $npm_package_config_name-$npm_package_config_version.zip $npm_package_config_name",
+    "prebuild": "npm run clean && webpack --config build/webpack.prod.config.js",
+    "build": "npm run copy && npm run zip"
+  },
+  "dependencies": {
+    "ejs": "~2.4.1",
+    "express": "~4.13.4",
+    "serve-static": "~1.10.2"
+  },
+  "devDependencies": {
+    "nodemon": "~1.9.1",
+    "webpack": "~1.13.0"
+  }
+}
