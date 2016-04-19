@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A html5 game based on PhaserJs
+A html5 version of minesweeper game based on PhaserJs
 
 ## Development Setup
 
